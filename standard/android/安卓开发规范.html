@@ -1,0 +1,1622 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width initial-scale=1">
+<title>安卓开发规范.md</title>
+<style type="text/css">
+.content {
+  padding: 86.45px 84px
+}
+</style>
+<style type="text/css">
+.content {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 700px; /* 700px is the width of the post in Medium */
+}
+
+/* hide TOC(table of contents). it's height is calculated from the original container */
+.content--buffer .table-of-contents {
+  height: 0;
+}
+
+.content > :first-child,
+.content > :first-child > * /* nested blocks */ {
+  margin-top: 0;
+}
+
+.content > :last-child,
+.content > :last-child > * /* nested blocks */ {
+  margin-bottom: 0;
+}
+
+.mermaid {
+  margin-bottom:  1.9rem;
+}
+
+.page-break {
+  page-break-before: always;
+}
+
+@media print {
+  /* fix | code blocks in PDF export are trimmed */
+  .content pre {
+    white-space: pre-wrap;
+  }
+}
+</style>
+<style type="text/css">
+
+
+
+/*
+ * Read-only
+ *
+ * To add a theme:
+ *   1. Add a .css file to the same folder.
+ *   2. Restart the app. */
+
+::selection {
+  background: hsl(210, 40%, 90%);
+}
+
+:root {
+  --line-height: 1.9rem;
+
+  background: #fff;
+  color: #333;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height:  1.9rem;
+}
+
+.content {
+  max-width: 626px;
+}
+
+/* Quotes
+   ---------------- */
+
+blockquote {
+  border-left: .2rem solid #ddd;
+  color: #999;
+  margin-left: 0;
+  padding-left: 1rem;
+  position: relative;
+}
+
+/* Headings
+   ---------------- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto";
+  font-weight: normal;
+  line-height: normal;
+  margin-bottom:  1.9rem;
+  margin-top: calc(1.5 *  1.9rem);
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.7rem;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: 1.4rem;
+}
+
+/* Paragraphs */
+
+p {
+  margin-bottom:  1.9rem;
+}
+
+/* Inlines
+   ---------------- */
+
+a[href] {
+  color: #79b;
+  text-decoration: none;
+}
+
+a[href] img {
+  /* hide link underline */
+  box-shadow: 0 10px 0 #fff;
+}
+
+kbd {
+  border: 2px solid #ddd;
+  border-bottom: 3px solid #ddd;
+  border-radius: 4px;
+  font-family: 'Fira Mono', monospace;
+  font-size: 1rem;
+  margin: 0 .2rem;
+  padding: .2rem .6rem;
+}
+
+strong {
+  font-weight: 500;
+}
+
+/* Media
+   ---------------- */
+
+img {
+  max-width: 100%;
+}
+
+/* Rules
+   ---------------- */
+
+hr {
+  border: none;
+  border-top: .2rem solid #ddd;
+  box-sizing: border-box;
+  height: 0;
+  padding: 0;
+  margin-bottom:  1.9rem;
+}
+
+/* Tables
+   ---------------- */
+
+table {
+  border-collapse: collapse;
+  border-top: .3rem solid #ddd;
+  margin-bottom:  1.9rem;
+  width: 100%;
+}
+
+table td,
+table th {
+  padding: calc( 1.9rem / 4) .6rem;
+}
+
+table td:first-child,
+table th:first-child {
+  padding-left: 0;
+}
+
+table td:last-child,
+table th:last-child {
+  padding-right: 0;
+}
+
+table th {
+  font-weight: normal;
+  text-align: left;
+}
+
+table tbody tr:first-child {
+  border-top: .2rem solid #ddd;
+}
+
+table tbody tr:last-child {
+  border-bottom: .3rem solid #ddd;
+}
+
+/* Unordered Lists
+   ---------------- */
+
+ul {
+  list-style: disc;
+  padding-left: 2.4rem;
+  margin-bottom:  1.9rem;
+}
+
+/* Ordered Lists
+   ---------------- */
+
+ol {
+  padding-left: 2.4rem;
+  margin-bottom:  1.9rem;
+}
+
+ol ul,
+ol ol,
+ul ol,
+ul ul {
+  margin-bottom: 0;
+  padding-left: 2.4rem;
+}
+
+ol ol,
+ul ol {
+  list-style-type: lower-roman;
+}
+
+/* Tasks
+   ---------------- */
+
+.task-list-item {
+  list-style-type: none;
+}
+
+.task-list-item input {
+  font-size: 1rem;
+  margin: 0 0 0 -1.6rem;
+  vertical-align: middle;
+  width: 1.3rem;
+}
+
+.task-list-item p {
+  margin-bottom: calc(.5 *  1.9rem);
+}
+
+/* Math
+   ---------------- */
+
+.katex-display {
+  padding: 0.6em 0;
+  font-size: 1.2em;
+  overflow-x: auto;
+  border-radius: 4px;
+  margin-bottom: 28px;
+  text-align: left;
+}
+
+.katex--error {
+  color: #777;
+}
+
+/* Code Blocks
+   ---------------- */
+
+code {
+  background: #f3f3f3;
+  border-radius: 2px;
+  color: #444;
+  font-family: 'Fira Mono', monospace;
+  font-size: .85em;
+  margin: 0 .2em;
+  padding: .1em .5em;
+}
+
+.content > pre {
+  background: #f3f3f3;
+  font-family: 'Fira Mono', monospace;
+  margin-bottom:  1.9rem;
+  padding: calc(.5 *  1.9rem) 1.2rem;
+  tab-size: 4;
+  overflow-x: auto;
+}
+
+.content > pre code {
+  background: none;
+  border: none;
+  color: #444;
+  margin: 0;
+  padding: 0;
+}
+
+/* Code
+   ---------------- */
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #aaa;
+}
+
+.token.operator,
+.token.punctuation {
+  color: #888;
+}
+
+.token.selector,
+.token.attr-name,
+.token.entity,
+.token.url {
+  color: #987;
+}
+
+.token.tag,
+.token.constant,
+.token.keyword {
+  color: #a7a;
+}
+
+.token.function,
+.token.attr-value {
+  color: #68a;
+}
+
+.token.number,
+.token.boolean,
+.token.regex,
+.token.string {
+  color: #6a8;
+}
+
+.token.variable,
+.token.property,
+.token.key {
+  color: #a66;
+}
+
+/* Print
+   ---------------- */
+
+@media print {
+  :root {
+    font-size: 14px !important;
+  }
+}
+
+</style>
+</head>
+<body>
+<h1 id="">法义安卓开发规范</h1>
+<h2 id="-2">摘要</h2>
+<ul>
+<li><a href="#1-%E5%89%8D%E8%A8%80">1 前言</a></li>
+<li><a href="#2-as%E8%A7%84%E8%8C%83">2 AS规范</a></li>
+<li><a href="#3-%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83">3 命名规范</a></li>
+<li><a href="#4-%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E8%A7%84%E8%8C%83">4 资源文件规范</a></li>
+<li><a href="#5-%E7%89%88%E6%9C%AC%E7%BB%9F%E4%B8%80%E8%A7%84%E8%8C%83">5 版本统一规范</a></li>
+<li><a href="#6-%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E8%A7%84%E8%8C%83">6 第三方库规范</a></li>
+<li><a href="#7-%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83">7 注释规范</a></li>
+<li><a href="#8-%E6%B5%8B%E8%AF%95%E8%A7%84%E8%8C%83">8 测试规范</a></li>
+<li><a href="#9-RN%E8%A7%84%E8%8C%83">9 RN规范</a></li>
+<li><a href="#10-%E5%85%B6%E4%BB%96%E7%9A%84%E4%B8%80%E4%BA%9B%E8%A7%84%E8%8C%83">10 其他的一些规范</a></li>
+</ul>
+<h3 id="1">1 前言</h3>
+<p>为了利于项目维护以及规范开发，促进成员之间Code Review的效率，故提出以下开发规范，如有更好建议。</p>
+<h3 id="2-as">2 AS规范</h3>
+<p>工欲善其事，必先利其器。</p>
+<ol>
+<li>尽量使用最新版的IDE进行开发；</li>
+<li>编码格式统一为<strong>UTF-8</strong>；</li>
+<li>编辑完<code>.java</code>、 <code>.xml</code>等文件后一定要<strong>格式化</strong>（基本格式方面使用 AS 默认模板即可）；</li>
+<li>删除多余的import，减少警告出现，可利用AS的<code>Optimize Imports</code>(Settings → Keymap → Optimize Imports)快捷键；</li>
+<li>Android开发者工具可以参考这里～ <strong>[Android开发者工具][Android开发者工具]</strong></li>
+</ol>
+<h3 id="3">3 命名规范</h3>
+<p>代码中的命名严禁使用拼音与英文混合的方式,更不允许直接使用中文的方式。正确的英文拼写和语法可以让阅读者易于理解,避免歧义。</p>
+<blockquote>
+<p>注意：即使纯拼音命名方式也要避免采用。但<code>alibaba</code>、<code>taobao</code>、<code>youku</code>、<code>hangzhou</code>等国际通用的名称,可视同英文。</p>
+</blockquote>
+<h4 id="31">3.1 包名</h4>
+<p>包名全部小写，连续的单词只是简单地连接起来，不使用下划线，采用反域名命名规则，全部使用小写字母。一级包名是顶级域名，通常为<code>com</code>,<code>edu</code>,<code>gov</code>,<code>net</code>,<code>org</code>等，二级包名为公司名，三级包名根据应用进行命名，后面就是对包名的划分了，关于包名的划分，推荐使用按功能分，一开始我们也是按照层去分包的，很坑爹。按照功能分可能你不是很好区分在哪个功能中，不过也比你按照层区分要好找很多。具体可以参考这篇博文～ <strong>[Package by features, not layers][Package by features, not layers]</strong>，当然，我们大谷歌也有相应的sample～ <strong>[iosched][iosched]</strong>，其结构如下所示，很值得学习。</p>
+<pre><code>java
+└─com
+    └─google
+        └─samples
+            └─apps
+                └─iosched
+                    │  AppApplication.java  定义Application类
+                    │  Config.java          定义配置数据（常量）
+                    │
+                    ├─about
+                    │      AboutActivity.java
+                    │
+                    ├─appwidget
+                    │      ScheduleWidgetProvider.java
+                    │      ScheduleWidgetRemoteViewsService.java
+                    │
+                    ├─debug
+                    │  │  DebugAction.java
+                    │  │  DebugActivity.java
+                    │  │  DebugFragment.java
+                    │  │
+                    │  └─actions
+                    │          DisplayUserDataDebugAction.java
+                    │          ForceAppDataSyncNowAction.java
+                    │          ForceSyncNowAction.java
+                    │          ...
+                    │
+                    ├─explore
+                    │  │  ExploreIOActivity.java
+                    │  │  ExploreIOFragment.java
+                    │  │  ExploreModel.java
+                    │  │  ...
+                    │  │
+                    │  └─data
+                    │          ItemGroup.java
+                    │          LiveStreamData.java
+                    │          MessageData.java
+                    │          ...
+                    │
+                    ├─feedback
+                    │      FeedbackApiHelper.java
+                    │      FeedbackConstants.java
+                    │      FeedbackHelper.java
+                    │      ...
+                    │
+                    ├─framework
+                    │      FragmentListener.java
+                    │      LoaderIdlingResource.java
+                    │      Model.java
+                    │      ...定义interface并实现
+                    │
+                    ├─gcm
+                    │  │  GCMCommand.java
+                    │  │  GCMIntentService.java
+                    │  │  GCMRedirectedBroadcastReceiver.java
+                    │  │  ...
+                    │  │
+                    │  └─command
+                    │          AnnouncementCommand.java
+                    │          NotificationCommand.java
+                    │          SyncCommand.java
+                    │          ...
+                    │
+                    ├─io
+                    │  │  BlocksHandler.java
+                    │  │  HandlerException.java
+                    │  │  HashtagsHandler.java
+                    │  │  ...处理model
+                    │  │
+                    │  ├─map
+                    │  │  └─model
+                    │  │          MapData.java
+                    │  │          Marker.java
+                    │  │          Tile.java
+                    │  │
+                    │  └─model
+                    │          Block.java
+                    │          DataManifest.java
+                    │          Hashtag.java
+                    │          ...
+                    │
+                    ├─map
+                    │  │  InlineInfoFragment.java
+                    │  │  MapActivity.java
+                    │  │  MapFragment.java
+                    │  │  ...
+                    │  │
+                    │  └─util
+                    │          CachedTileProvider.java
+                    │          MarkerLoadingTask.java
+                    │          MarkerModel.java
+                    │          ...
+                    │
+                    ├─model
+                    │      ScheduleHelper.java
+                    │      ScheduleItem.java
+                    │      ScheduleItemHelper.java
+                    │      ...定义model以及实现model相关操作
+                    │
+                    ├─myschedule
+                    │      MyScheduleActivity.java
+                    │      MyScheduleAdapter.java
+                    │      MyScheduleFragment.java
+                    │      ...
+                    │
+                    ├─provider
+                    │      ScheduleContract.java
+                    │      ScheduleContractHelper.java
+                    │      ScheduleDatabase.java
+                    │      ...实现ContentProvider
+                    │      （也在此处定义provider依赖的其它类，比如db操作）
+                    │
+                    ├─receiver
+                    │      SessionAlarmReceiver.java
+                    │
+                    ├─service
+                    │      DataBootstrapService.java
+                    │      SessionAlarmService.java
+                    │      SessionCalendarService.java
+                    │
+                    ├─session
+                    │      SessionDetailActivity.java
+                    │      SessionDetailConstants.java
+                    │      SessionDetailFragment.java
+                    │      ...
+                    │
+                    ├─settings
+                    │      ConfMessageCardUtils.java
+                    │      SettingsActivity.java
+                    │      SettingsUtils.java
+                    │
+                    ├─social
+                    │      SocialActivity.java
+                    │      SocialFragment.java
+                    │      SocialModel.java
+                    │
+                    ├─sync
+                    │  │  ConferenceDataHandler.java
+                    │  │  RemoteConferenceDataFetcher.java
+                    │  │  SyncAdapter.java
+                    │  │  ...
+                    │  │
+                    │  └─userdata
+                    │      │  AbstractUserDataSyncHelper.java
+                    │      │  OnSuccessListener.java
+                    │      │  UserAction.java
+                    │      │  ...
+                    │      │
+                    │      ├─gms
+                    │      │      DriveHelper.java
+                    │      │      GMSUserDataSyncHelper.java
+                    │      │
+                    │      └─util
+                    │              UserActionHelper.java
+                    │              UserDataHelper.java
+                    │
+                    ├─ui
+                    │  │  BaseActivity.java
+                    │  │  CheckableLinearLayout.java
+                    │  │  SearchActivity.java
+                    │  │  ...BaseActivity以及自定义UI组件
+                    │  │
+                    │  └─widget
+                    │          AspectRatioView.java
+                    │          BakedBezierInterpolator.java
+                    │          BezelImageView.java
+                    │          ...自定义小UI控件
+                    │
+                    ├─util
+                    │      AboutUtils.java
+                    │      AccountUtils.java
+                    │      AnalyticsHelper.java
+                    │      ...工具类，提供静态方法
+                    │
+                    ├─videolibrary
+                    │      VideoLibraryActivity.java
+                    │      VideoLibraryFilteredActivity.java
+                    │      VideoLibraryFilteredFragment.java
+                    │      ...
+                    │
+                    └─welcome
+                            AccountFragment.java
+                            AttendingFragment.java
+                            ConductFragment.java
+                            ...
+</code></pre>
+<p>参考Google I/O 2015的代码结构，按功能分包具体可以这样做：</p>
+<pre><code>src
+└─com
+    └─domain
+        └─app
+            │  AppApplication.java  定义Application类
+            │  Config.java          定义配置数据（常量）
+            │
+            ├─framework
+            │      定义interface以及相关基类
+            │
+            ├─io
+            │      数据定义（model）、数据操作（比如json解析，但不包括db操作）
+            │
+            ├─model
+            │      定义model（数据结构以及getter/setter、compareTo、equals等等，不含复杂操作）
+            │      以及modelHelper（提供便于操作model的api）
+            │
+            ├─provider
+            │      实现ContentProvider，及其依赖的db操作
+            │
+            ├─receiver
+            │      实现Receiver
+            │
+            ├─service
+            │      实现Service（比如IntentService），用于在独立线程中异步do stuff
+            │
+            ├─ui
+            │      实现BaseActivity，以及自定义view和widget，相关的Adapter也放这里
+            │
+            ├─util
+            │      实现工具类，提供静态方法
+            │
+            ├─feature1
+            │      Item.java                定义model
+            │      ItemHelper.java          实现modelHelper
+            │      feature1Activity.java    定义UI
+            │      feature1DAO.java         私有db操作
+            │      feature1Utils.java       私有工具函数
+            │      ...其它私有class
+            │
+            ├─...其它feature
+</code></pre>
+<p>PBF(按功能分包Package By Feature)与PBL(按层分包Package By Layer)相比较有如下优势：</p>
+<ul>
+<li>package内高内聚，package间低耦合</li>
+</ul>
+<p>哪块要添新功能，只改某一个package下的东西</p>
+<p>按class职能分层（PBL）降低了代码耦合，但带来了package耦合，要添新功能，需要改model、dbHelper、view、service等等，需要改动好几个package下的代码，改动的地方越多，越容易产生新问题，不是吗？</p>
+<p>按功能分包（PBF），featureA相关的所有东西都在featureA包，feature内高内聚高度模块化，不同feature之间低耦合，相关的东西都放在一起，还好找</p>
+<ul>
+<li>package有私有作用域（package-private scope）</li>
+</ul>
+<p>你负责开发这块功能，这个目录下所有东西都是你的</p>
+<p>PBL的方式是把所有工具方法都放在util包下，小张开发新功能时候发现需要一个xxUtil，但它又不是通用的，那应该放在哪里？没办法，按照分层原则，我们还得放在util包下，好像不太合适，但放在其它包更不合适，功能越来越多，util类也越定义越多。后来小李负责开发一块功能时发现需要一个xxUtil，同样不通用，去util包一看，怎么已经有了，而且还没法复用，只好放弃xx这个名字，改为xxxUtil……因为PBL的package没有私有作用域，每一个包都是public（跨包方法调用是很平常的事情，每一个包对其它包来说都是可访问的）</p>
+<p>如果是PBF，小张的xxUtil自然放在feautreA下，小李的xxUtil在featureB下，如果觉得util好像是通用的，就去util包看看要不要把工具方法添进xxUtil，class命名冲突没有了</p>
+<p>PBF的package有私有作用域，featureA不应该访问featureB下的任何东西（如果非访问不可，那就说明接口定义有问题）</p>
+<ul>
+<li>很容易删除功能</li>
+</ul>
+<p>统计发现新功能没人用，这个版本那块功能得去掉</p>
+<p>如果是PBL，得从功能入口到整个业务流程把受到牵连的所有能删的代码和class都揪出来删掉，一不小心就完蛋</p>
+<p>如果是PBF，好说，先删掉对应包，再删掉功能入口（删掉包后入口肯定报错了），完事</p>
+<ul>
+<li>高度抽象</li>
+</ul>
+<p>解决问题的一般方法是从抽象到具体，PBF包名是对功能模块的抽象，包内的class是实现细节，符合从抽象到具体，而PBL弄反了</p>
+<p>PBF从确定AppName开始，根据功能模块划分package，再考虑每块的具体实现细节，而PBL从一开始就要考虑要不要dao层，要不要com层等等</p>
+<ul>
+<li>只通过class来分离逻辑代码</li>
+</ul>
+<p>PBL既分离class又分离package，而PBF只通过class来分离逻辑代码</p>
+<p>没有必要通过package分离，因为PBL中也可能出现尴尬的情况：</p>
+<pre><code>├─service
+        │      MainServ.java
+</code></pre>
+<p>按照PBL，service包下的所有东西都是Controller，应该不需要Serv后缀，但实际上通常为了码起来方便，直接import service包，Serv后缀是为了避免引入的class和当前包下的class命名冲突，当然，不用后缀也可以，得写清楚包路径，比如new net.ayqy.service.Main()，麻烦</p>
+<p>而PBF就很方便，无需import，直接new MainServ()即可</p>
+<ul>
+<li>package的大小有意义了</li>
+</ul>
+<p>PBL中包的大小无限增长是合理的，因为功能越添越多</p>
+<p>而PBF中包太大（包里class太多）表示这块需要重构（划分子包）</p>
+<h4 id="32">3.2 类名</h4>
+<p>类名都以<code>UpperCamelCase</code>风格编写。</p>
+<p>类名通常是名词或名词短语，接口名称有时可能是形容词或形容词短语。现在还没有特定的规则或行之有效的约定来命名注解类型。</p>
+<p>名词，采用大驼峰命名法，尽量避免缩写，除非该缩写是众所周知的， 比如<code>HTML</code>, <code>URL</code>，如果类名称中包含单词缩写，则单词缩写的每个字母均应大写。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">类</th>
+<th style="text-align:left">描述</th>
+<th style="text-align:left">例如</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Activity 类</td>
+<td style="text-align:left">Activity为后缀标识</td>
+<td style="text-align:left">欢迎页面类WelcomeActivity</td>
+</tr>
+<tr>
+<td style="text-align:left">Adapter类</td>
+<td style="text-align:left">Adapter 为后缀标识</td>
+<td style="text-align:left">新闻详情适配器 NewDetailAdapter</td>
+</tr>
+<tr>
+<td style="text-align:left">解析类</td>
+<td style="text-align:left">Parser为后缀标识</td>
+<td style="text-align:left">首页解析类HomePosterParser</td>
+</tr>
+<tr>
+<td style="text-align:left">工具方法类</td>
+<td style="text-align:left">Utils或Manager为后缀标识（与系统或第三方的Utils区分）或功能+Utils</td>
+<td style="text-align:left">线程池管理类：ThreadPoolManager日志工具类：LogUtils（Logger也可）打印工具类：PrinterUtils</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库类</td>
+<td style="text-align:left">以DBHelper后缀标识</td>
+<td style="text-align:left">新闻数据库：NewDBHelper</td>
+</tr>
+<tr>
+<td style="text-align:left">Service类</td>
+<td style="text-align:left">以Service为后缀标识</td>
+<td style="text-align:left">时间服务TimeService</td>
+</tr>
+<tr>
+<td style="text-align:left">BroadcastReceiver类</td>
+<td style="text-align:left">以Receiver为后缀标识</td>
+<td style="text-align:left">推送接收JPushReceiver</td>
+</tr>
+<tr>
+<td style="text-align:left">ContentProvider类</td>
+<td style="text-align:left">以Provider为后缀标识</td>
+<td style="text-align:left">ShareProvider</td>
+</tr>
+<tr>
+<td style="text-align:left">自定义的共享基础类</td>
+<td style="text-align:left">以Base开头</td>
+<td style="text-align:left">BaseActivity,BaseFragment</td>
+</tr>
+</tbody>
+</table>
+<p>测试类的命名以它要测试的类的名称开始，以Test结束。例如：<code>HashTest</code>或<code>HashIntegrationTest</code>。</p>
+<p>接口（interface）：命名规则与类一样采用大驼峰命名法，多以able或ible结尾，如
+<code>interface Runnable</code>、<code>interface Accessible</code>。</p>
+<blockquote>
+<p>注意：如果项目采用MVP，所有Model、View、Presenter的接口都以I为前缀，不加后缀，其他的接口采用上述命名规则。</p>
+</blockquote>
+<h4 id="33">3.3 方法名</h4>
+<p>方法名都以<code>lowerCamelCase</code>风格编写。</p>
+<p>方法名通常是动词或动词短语。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">initXX()</td>
+<td>初始化相关方法,使用init为前缀标识，如初始化布局initView()</td>
+</tr>
+<tr>
+<td style="text-align:left">isXX() checkXX()</td>
+<td>方法返回值为boolean型的请使用is或check为前缀标识</td>
+</tr>
+<tr>
+<td style="text-align:left">getXX()</td>
+<td>返回某个值的方法，使用get为前缀标识</td>
+</tr>
+<tr>
+<td style="text-align:left">setXX()</td>
+<td>设置某个属性值</td>
+</tr>
+<tr>
+<td style="text-align:left">handleXX()/processXX()</td>
+<td>对数据进行处理的方法</td>
+</tr>
+<tr>
+<td style="text-align:left">displayXX()/showXX()</td>
+<td>弹出提示框和提示信息，使用display/show为前缀标识</td>
+</tr>
+<tr>
+<td style="text-align:left">updateXX()</td>
+<td>更新数据</td>
+</tr>
+<tr>
+<td style="text-align:left">saveXX()</td>
+<td>保存数据</td>
+</tr>
+<tr>
+<td style="text-align:left">resetXX()</td>
+<td>重置数据</td>
+</tr>
+<tr>
+<td style="text-align:left">clearXX()</td>
+<td>清除数据</td>
+</tr>
+<tr>
+<td style="text-align:left">removeXX()</td>
+<td>移除数据或者视图等，如removeView();</td>
+</tr>
+<tr>
+<td style="text-align:left">drawXX()</td>
+<td>绘制数据或效果相关的，使用draw前缀标识</td>
+</tr>
+</tbody>
+</table>
+<h4 id="34">3.4 常量名</h4>
+<p>常量名命名模式为<code>CONSTANT_CASE</code>，全部字母大写，用下划线分隔单词。那，到底什么算是一个常量？</p>
+<p>每个常量都是一个静态<code>final</code>字段，但不是所有静态<code>final</code>字段都是常量。在决定一个字段是否是一个常量时，考虑它是否真的感觉像是一个常量。例如，如果任何一个该实例的观测状态是可变的，则它几乎肯定不会是一个常量。只是永远不打算改变对象一般是不够的，它要真的一直不变才能将它示为常量。</p>
+<pre><code class="language-java"><span class="token comment" spellcheck="true">// Constants</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> NUMBER <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> ImmutableListNAMES <span class="token operator">=</span> ImmutableList<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token string">"Ed"</span><span class="token punctuation">,</span> <span class="token string">"Ann"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> Joiner COMMA_JOINER <span class="token operator">=</span> Joiner<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">','</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// because Joiner is immutable</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> SomeMutableType<span class="token punctuation">[</span><span class="token punctuation">]</span> EMPTY_ARRAY <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">enum</span> SomeEnum <span class="token punctuation">{</span> ENUM_CONSTANT <span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// Not constants</span>
+<span class="token keyword">static</span> String nonFinal <span class="token operator">=</span> <span class="token string">"non-final"</span><span class="token punctuation">;</span>
+<span class="token keyword">final</span> String nonStatic <span class="token operator">=</span> <span class="token string">"non-static"</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> SetmutableCollection <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> ImmutableSetmutableElements <span class="token operator">=</span> ImmutableSet<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>mutable<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> Logger logger <span class="token operator">=</span> Logger<span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span>MyClass<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">final</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> nonEmptyArray <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"these"</span><span class="token punctuation">,</span> <span class="token string">"can"</span><span class="token punctuation">,</span> <span class="token string">"change"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="35">3.5 非常量字段名</h4>
+<p>非常量字段名以<code>lowerCamelCase</code>风格的基础上改造为如下风格：基本结构为<code>scopeVariableNameType</code>。</p>
+<p><strong>scope：范围</strong></p>
+<p>非公有，非静态字段命名以m开头。</p>
+<p>静态字段命名以s开头。</p>
+<p>公有非静态字段命名以p开头。</p>
+<p>公有静态字段（全局变量）命名以g开头。</p>
+<p>例子：</p>
+<pre><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyClass</span> <span class="token punctuation">{</span>
+      <span class="token keyword">int</span> packagePrivate<span class="token punctuation">;</span>  
+      <span class="token keyword">private</span> <span class="token keyword">static</span> MyClass singleton<span class="token punctuation">;</span>  
+      <span class="token keyword">public</span> <span class="token keyword">int</span> count<span class="token punctuation">;</span>
+      <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> autoIncrement<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>使用1字符前缀来表示作用范围，1个字符的前缀必须小写，前缀后面是由表意性强的一个单词或多个单词组成的名字，而且每个单词的首写字母大写，其它字母小写，这样保证了对变量名能够进行正确的断句。</p>
+<p><strong>Type：类型</strong></p>
+<p>考虑到Android中使用很多UI控件，为避免控件和普通成员变量混淆以及更好达意，所有用来表示控件的成员变量统一加上控件缩写作为后缀（文末附有缩写表）。</p>
+<p>对于普通变量一般不添加类型后缀，如果统一添加类型后缀，请参考文末的缩写表。</p>
+<p>用统一的量词通过在结尾处放置一个量词，就可创建更加统一的变量，它们更容易理解，也更容易搜索。</p>
+<p>例如，请使用<code>customerStrFirst</code>和<code>customerStrLast</code>，而不要使用<code>firstCustomerStr</code>和<code>lastCustomerStr</code>。</p>
+<table>
+<thead>
+<tr>
+<th>量词列表</th>
+<th>量词后缀说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First</td>
+<td>一组变量中的第一个</td>
+</tr>
+<tr>
+<td>Last</td>
+<td>一组变量中的最后一个</td>
+</tr>
+<tr>
+<td>Next</td>
+<td>一组变量中的下一个变量</td>
+</tr>
+<tr>
+<td>Prev</td>
+<td>一组变量中的上一个</td>
+</tr>
+<tr>
+<td>Cur</td>
+<td>一组变量中的当前变量</td>
+</tr>
+</tbody>
+</table>
+<p>说明：</p>
+<p>集合添加如下后缀：List、Map、Set
+数组添加如下后缀：Arr</p>
+<blockquote>
+<p>注意：所有的VO（值对象）统一采用标准的lowerCamelCase风格编写，所有的DTO（数据传输对象）就按照接口文档中定义的字段名编写。</p>
+</blockquote>
+<h4 id="36">3.6 参数名</h4>
+<p>参数名以<code>lowerCamelCase</code>风格编写。
+参数应该避免用单个字符命名。</p>
+<h4 id="37">3.7 局部变量名</h4>
+<p>局部变量名以<code>lowerCamelCase</code>风格编写，比起其它类型的名称，局部变量名可以有更为宽松的缩写。</p>
+<p>虽然缩写更宽松，但还是要避免用单字符进行命名，除了临时变量和循环变量。</p>
+<p>即使局部变量是final和不可改变的，也不应该把它示为常量，自然也不能用常量的规则去命名它。</p>
+<h4 id="38">3.8 临时变量</h4>
+<p>临时变量通常被取名为<code>i</code>、<code>j</code>、<code>k</code>、<code>m</code>和<code>n</code>，它们一般用于整型；<code>c</code>、<code>d</code>、<code>e</code>，它们一般用于字符型。 如：<code>for (int i = 0; i &lt; len ; i++)</code>。</p>
+<h4 id="39-idestyle">3.9 ide编码style</h4>
+<p>参考JakeWharton</p>
+<h3 id="4">4 资源文件规范</h3>
+<h4 id="41-xmllayout">4.1 资源布局文件（XML文件（layout布局文件））</h4>
+<p>全部小写，采用下划线命名法</p>
+<h5 id="411-contentview">4.1.1 contentView命名</h5>
+<p>必须以全部单词小写，单词间以下划线分割，使用名词或名词词组。</p>
+<p>所有Activity或Fragment的contentView必须与其类名对应，对应规则为：将所有字母都转为小写，将类型和功能调换（也就是后缀变前缀）。</p>
+<p>例如：<code>activity_main.xml</code></p>
+<h5 id="412-dialog">4.1.2 Dialog命名</h5>
+<p>规则：<code>dialog_描述.xml</code></p>
+<p>例如：<code>dialog_hint.xml</code></p>
+<h5 id="413-popupwindow">4.1.3 PopupWindow命名</h5>
+<p>规则：<code>ppw_描述.xml</code></p>
+<p>例如：<code>ppw_info.xml</code></p>
+<h5 id="414">4.1.4 列表项命名</h5>
+<p>规则：<code>item_描述.xml</code>,</p>
+<p>例如：<code>item_city.xml</code></p>
+<h5 id="415">4.1.5 包含项命名</h5>
+<p>规则：<code>模块_(位置)描述.xml</code></p>
+<p>例如：<code>activity_main_head.xml</code>、<code>activity_main_bottom.xml</code></p>
+<p>注意：通用的包含项命名采用：<code>项目名称缩写_描述.xml</code></p>
+<p>例如：<code>xxxx_title.xml</code></p>
+<h4 id="42-drawable">4.2 资源文件（图片drawable文件夹下）</h4>
+<p>全部小写，采用下划线命名法，加前缀区分</p>
+<p>命名模式：可加后缀&nbsp;<code>_small</code>&nbsp;表示小图，&nbsp;<code>_big</code>&nbsp;表示大图，逻辑名称可由多个单词加下划线组成，采用以下规则：</p>
+<ul>
+<li><code>用途_模块名_逻辑名称</code></li>
+<li><code>用途_模块名_颜色</code></li>
+<li><code>用途_逻辑名称</code></li>
+<li><code>用途_颜色</code></li>
+</ul>
+<p>说明：用途也指控件类型（具体见附录<a href="#ui%E6%8E%A7%E4%BB%B6%E7%BC%A9%E5%86%99%E8%A1%A8">UI控件缩写表</a>）</p>
+<p>例如：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>btn_main_home.png</td>
+<td>按键<code>用途_模块名_逻辑名称</code></td>
+</tr>
+<tr>
+<td>divider_maket_white.png</td>
+<td>分割线<code>用途_模块名_颜色</code></td>
+</tr>
+<tr>
+<td>ic_edit.png</td>
+<td>图标<code>用途_逻辑名称</code></td>
+</tr>
+<tr>
+<td>bg_main.png</td>
+<td>背景<code>用途_逻辑名称</code></td>
+</tr>
+<tr>
+<td>btn_red.png</td>
+<td>红色按键<code>用途_颜色</code></td>
+</tr>
+<tr>
+<td>btn_red_big.png</td>
+<td>红色大按键<code>用途_颜色</code></td>
+</tr>
+<tr>
+<td>ic_head_small.png</td>
+<td>小头像<code>用途_逻辑名称</code></td>
+</tr>
+<tr>
+<td>bg_input.png</td>
+<td>输入框背景<code>用途_逻辑名称</code></td>
+</tr>
+<tr>
+<td>divider_white.png</td>
+<td>白色分割线<code>用途_颜色</code></td>
+</tr>
+<tr>
+<td>bg_main_head</td>
+<td>主模块头部背景图片<code>用途_模块名_逻辑名称</code></td>
+</tr>
+<tr>
+<td>def_search_cell</td>
+<td>默认搜索界面单元图片<code>用途_模块名_逻辑名称</code></td>
+</tr>
+<tr>
+<td>ic_more_help</td>
+<td>更多帮助图标<code>用途_逻辑名称</code></td>
+</tr>
+<tr>
+<td>divider_list_line</td>
+<td>列表分割线<code>用途_逻辑名称</code></td>
+</tr>
+<tr>
+<td>sel_search_ok</td>
+<td>搜索界面确认选择器<code>用途_模块名_逻辑名称</code></td>
+</tr>
+<tr>
+<td>shape_music_ring</td>
+<td>音乐界面环形形状<code>用途_模块名_逻辑名称</code></td>
+</tr>
+</tbody>
+</table>
+<p>如果有多种形态，如按钮选择器：<code>sel_btn_xx.xml</code></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sel_btn_xx</td>
+<td>按钮图片使用<code>btn_整体效果</code>（selector）</td>
+</tr>
+<tr>
+<td>btn_xx_normal</td>
+<td>按钮图片使用<code>btn_正常情况效果</code></td>
+</tr>
+<tr>
+<td>btn_xx_pressed</td>
+<td>按钮图片使用<code>btn_点击时候效果</code></td>
+</tr>
+<tr>
+<td>btn_xx_focused</td>
+<td><code>state_focused</code>聚焦效果</td>
+</tr>
+<tr>
+<td>btn_xx_disabled</td>
+<td><code>state_enabled</code>&nbsp;(false)不可用效果</td>
+</tr>
+<tr>
+<td>btn_xx_checked</td>
+<td><code>state_checked</code>选中效果</td>
+</tr>
+<tr>
+<td>btn_xx_selected</td>
+<td><code>state_selected</code>选中效果</td>
+</tr>
+<tr>
+<td>btn_xx_hovered</td>
+<td><code>state_hovered</code>悬停效果</td>
+</tr>
+<tr>
+<td>btn_xx_checkable</td>
+<td><code>state_checkable</code>可选效果</td>
+</tr>
+<tr>
+<td>btn_xx_activated</td>
+<td><code>state_activated</code>激活的</td>
+</tr>
+<tr>
+<td>btn_xx_windowfocused</td>
+<td><code>state_window_focused</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注意：使用AndroidStudio的插件<code>SelectorChapek</code>可以快速生成selector，前提是命名要规范。</p>
+</blockquote>
+<h4 id="43-anim">4.3 动画文件（anim文件夹下）</h4>
+<p>全部小写，采用下划线命名法，加前缀区分。</p>
+<p>具体动画采用以下规则：<code>模块名_逻辑名称</code>。</p>
+<p>例如：<code>refresh_progress.xml</code>、<code>market_cart_add.xml</code>、<code>market_cart_remove.xml</code>。</p>
+<p>普通的tween动画采用如下表格中的命名方式：<code>动画类型_方向</code></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fade_in</td>
+<td>淡入</td>
+</tr>
+<tr>
+<td>fade_out</td>
+<td>淡出</td>
+</tr>
+<tr>
+<td>push_down_in</td>
+<td>从下方推入</td>
+</tr>
+<tr>
+<td>push_down_out</td>
+<td>从下方推出</td>
+</tr>
+<tr>
+<td>push_left</td>
+<td>推向左方</td>
+</tr>
+<tr>
+<td>slide_in_from_top</td>
+<td>从头部滑动进入</td>
+</tr>
+<tr>
+<td>zoom_enter</td>
+<td>变形进入</td>
+</tr>
+<tr>
+<td>slide_in</td>
+<td>滑动进入</td>
+</tr>
+<tr>
+<td>shrink_to_middle</td>
+<td>中间缩小</td>
+</tr>
+</tbody>
+</table>
+<h4 id="44-valuesname">4.4 values中name命名</h4>
+<h5 id="441-colorsxml">4.4.1 colors.xml</h5>
+<p><code>colors.xml</code>的<code>name</code>命名使用下划线命名法，在你的<code>colors.xml</code>文件中应该只是映射颜色的名称一个ARGB值，而没有其它的。不要使用它为不同的按钮来定义ARGB值。</p>
+<p><strong>不要这样做</strong></p>
+<pre><code class="language-xml">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button_foreground<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>#FFFFFF<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button_background<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>#2A91BD<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>comment_background_inactive<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>#5F5F5F<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>comment_background_active<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>#939393<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>comment_foreground<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>#FFFFFF<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>comment_foreground_important<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>#FF9D2F<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+      ...
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>comment_shadow<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>#323232<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<p>使用这种格式，你会非常容易的开始重复定义ARGB值，这使如果需要改变基本色变的很复杂。同时，这些定义是跟一些环境关联起来的，如<code>button</code>或者<code>comment</code>, 应该放到一个按钮风格中，而不是在<code>colors.xml</code>文件中。</p>
+<p><strong>相反，这样做</strong></p>
+<pre><code class="language-xml">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">&gt;</span></span>
+
+      <span class="token comment" spellcheck="true">&lt;!-- grayscale --&gt;</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>white<span class="token punctuation">"</span></span>     <span class="token punctuation">&gt;</span></span>#FFFFFF<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>gray_light<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>#DBDBDB<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>gray<span class="token punctuation">"</span></span>      <span class="token punctuation">&gt;</span></span>#939393<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>gray_dark<span class="token punctuation">"</span></span> <span class="token punctuation">&gt;</span></span>#5F5F5F<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>black<span class="token punctuation">"</span></span>     <span class="token punctuation">&gt;</span></span>#323232<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+
+      <span class="token comment" spellcheck="true">&lt;!-- basic colors --&gt;</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>green<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>#27D34D<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>blue<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>#2A91BD<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>orange<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>#FF9D2F<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>color</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>red<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>#FF432F<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>color</span><span class="token punctuation">&gt;</span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<p>向应用设计者那里要这个调色板，名称不需要跟<code>"green"</code>、<code>"blue"</code>等等相同。<code>"brand_primary"</code>、<code>"brand_secondary"</code>、<code>"brand_negative"</code>这样的名字也是完全可以接受的。 像这样规范的颜色很容易修改或重构，会使应用一共使用了多少种不同的颜色变得非常清晰。 通常一个具有审美价值的UI来说，减少使用颜色的种类是非常重要的。</p>
+<blockquote>
+<p>注意：如果某些颜色和主题有关，那就单独写一个<code>colors_theme.xml</code>。</p>
+</blockquote>
+<h5 id="442-dimensxml">4.4.2 dimens.xml</h5>
+<p>像对待<code>colors.xml</code>一样对待<code>dimens.xml</code>文件 与定义颜色调色板一样，你同时也应该定义一个空隙间隔和字体大小的“调色板”。 一个好的例子，如下所示：</p>
+<pre><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token comment" spellcheck="true">&lt;!-- font sizes --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dimen</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>font_22<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>22sp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dimen</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dimen</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>font_18<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>18sp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dimen</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dimen</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>font_15<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>15sp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dimen</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dimen</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>font_12<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>12sp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dimen</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token comment" spellcheck="true">&lt;!-- typical spacing between two views --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dimen</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spacing_40<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>40dp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dimen</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dimen</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spacing_24<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>24dp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dimen</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dimen</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spacing_14<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>14dp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dimen</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dimen</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spacing_10<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>10dp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dimen</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dimen</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>spacing_4<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>4dp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dimen</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token comment" spellcheck="true">&lt;!-- typical sizes of views --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dimen</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button_height_60<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>60dp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dimen</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dimen</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button_height_40<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>40dp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dimen</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dimen</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button_he3423565ight_32<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>32dp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dimen</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">&gt;</span></span>
+
+</code></pre>
+<p>布局时在写<code>margins</code>和<code>paddings</code>时，你应该使用<code>spacing_xx</code>尺寸格式来布局，而不是像对待<code>string</code>字符串一样直接写值，像这样规范的尺寸很容易修改或重构，会使应用所有用到的尺寸一目了然。 这样写会非常有感觉，会使组织和改变风格或布局是非常容易。</p>
+<h5 id="443-stringsxml">4.4.3 strings.xml</h5>
+<p><code>strings</code>的<code>name</code>命名使用下划线命名法，采用以下规则：<code>模块名+逻辑名称</code>，这样方便同一个界面的所有string都放到一起，方便查找。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>main_menu_about</td>
+<td>主菜单按键文字</td>
+</tr>
+<tr>
+<td>friend_title</td>
+<td>好友模块标题栏</td>
+</tr>
+<tr>
+<td>friend_dialog_del</td>
+<td>好友删除提示</td>
+</tr>
+<tr>
+<td>login_check_email</td>
+<td>登录验证</td>
+</tr>
+<tr>
+<td>dialog_title</td>
+<td>弹出框标题</td>
+</tr>
+<tr>
+<td>button_ok</td>
+<td>确认键</td>
+</tr>
+<tr>
+<td>loading</td>
+<td>加载文字</td>
+</tr>
+</tbody>
+</table>
+<h5 id="444-stylesxml">4.4.4 styles.xml</h5>
+<p><code>style</code>的<code>name</code>命名使用大驼峰命名法，几乎每个项目都需要适当的使用<code>style</code>文件，因为对于一个视图来说有一个重复的外观是很常见的，将所有的外观细节属性（<code>colors</code>、<code>padding</code>、<code>font</code>）放在<code>style</code>文件中。 在应用中对于大多数文本内容，最起码你应该有一个通用的<code>style</code>文件，例如：</p>
+<pre><code>&lt;style name="ContentText"&gt;
+    &lt;item name="android:textSize"&gt;@dimen/font_normal&lt;/item&gt;
+    &lt;item name="android:textColor"&gt;@color/basic_black&lt;/item&gt;
+&lt;/style&gt;
+</code></pre>
+<p>应用到<code>TextView</code>中:</p>
+<pre><code>&lt;TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/price"
+    style="@style/ContentText"
+    /&gt;
+</code></pre>
+<p>你或许需要为按钮控件做同样的事情，不要停止在那里。将一组相关的和重复<code>android:****</code>的属性放到一个通用的<code>style</code>中。</p>
+<p><strong>将一个大的<code>styles.xml</code>文件分割成多个文件</strong>，&nbsp;你可以有多个<code>styles.xml</code>&nbsp;文件。Android SDK支持其它文件，<code>styles.xml</code>这个文件名称并没有作用，起作用的是在文件里的<code>&lt;style&gt;</code>标签。因此你可以有多个style文件，如<code>styles.xml</code>、<code>styles_home.xml</code>、<code>styles_item_details.xml</code>、<code>styles_forms.xml</code>。 不同于资源文件路径需要为系统构建起的有意义，在<code>res/values</code>目录下的文件可以任意命名。</p>
+<h4 id="45-layoutid">4.5 layout中的id命名</h4>
+<p>命名模式为：<code>view缩写_模块名_逻辑名</code>，比如<code>btn_main_search</code>
+使用<code>AndroidStudio</code>的插件<code>ButterKnife Zelezny</code>，生成注解非常方便，原生的话可以使用<code>Android Code Generator</code>插件。</p>
+<h3 id="5">5 版本统一规范</h3>
+<p>Android开发存在着众多版本的不同，比如<code>compileSdkVersion</code>、<code>minSdkVersion</code>、<code>targetSdkVersion</code>以及项目中依赖第三方库的版本，不同的module及不同的开发人员都有不同的版本，所以需要一个统一版本规范的文件。</p>
+<h3 id="6">6 第三方库规范</h3>
+<p>希望Team能用时下较新的技术，对开源库的选取，一般都需要选择比较稳定的版本，作者在维护的项目，要考虑作者对issue的解决，以及开发者的知名度等各方面。选取之后，一定的封装是必要的。</p>
+<p>个人推荐Team可使用如下优秀轮子：</p>
+<ul>
+<li><strong>[Retrofit][Retrofit]</strong></li>
+<li><strong>[RxAndroid][RxAndroid]</strong></li>
+<li><strong>[OkHttp][OkHttp]</strong></li>
+<li><strong>[Glide][Glide]</strong> / <strong>[Fresco][Fresco]</strong></li>
+<li><strong>[Gson][Gson]</strong> / <strong>[Fastjson][Fastjson]</strong></li>
+<li><strong>[EventBus][EventBus]</strong> / <strong>[AndroidEventBus][AndroidEventBus]</strong></li>
+<li><strong>[GreenDao][GreenDao]</strong></li>
+<li><strong>[Dagger2][Dagger2]</strong>(选用)</li>
+<li><strong>[Tinker][Tinker]</strong>(选用)</li>
+</ul>
+<h3 id="7">7 注释规范</h3>
+<p>为了减少他人阅读你代码的痛苦值，请在关键地方做好注释。</p>
+<h4 id="71">7.1 类注释</h4>
+<p>每个类完成后应该有作者姓名和联系方式的注释，对自己的代码负责。</p>
+<pre><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * &lt;pre&gt;
+ *     author : Blankj
+ *     e-mail : xxx@xx
+ *     time   : 2017/03/07
+ *     desc   : xxxx描述
+ *     version: 1.0
+ * &lt;/pre&gt;
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">WelcomeActivity</span> <span class="token punctuation">{</span>
+       <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>具体可以在AS中自己配制，Settings → Editor → File and Code Templates → Includes → File Header，输入</p>
+<pre><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * @author ${USER}
+ * @e-mail wangwb@13322.com
+ * @time ${YEAR}/${MONTH}/${DAY}
+ * @desc 
+ * @version: 
+ */</span>
+</code></pre>
+<p>这样便可在每次新建类的时候自动加上该头注释。</p>
+<h4 id="72">7.2 方法注释</h4>
+<p>每一个成员方法（包括自定义成员方法、覆盖方法、属性方法）的方法头都必须做方法头注释，在方法前一行输入<code>/** + 回车</code>或者设置<code>Fix doc comment</code>(Settings → Keymap → Fix doc comment)快捷键，AS便会帮你生成模板，我们只需要补全参数即可，如下所示。</p>
+<pre><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * bitmap转byteArr
+ *
+ * @param bitmap bitmap对象
+ * @param format 格式
+ * @return 字节数组
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">bitmap2Bytes</span><span class="token punctuation">(</span>Bitmap bitmap<span class="token punctuation">,</span> CompressFormat format<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>bitmap <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+    ByteArrayOutputStream baos <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ByteArrayOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    bitmap<span class="token punctuation">.</span><span class="token function">compress</span><span class="token punctuation">(</span>format<span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> baos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> baos<span class="token punctuation">.</span><span class="token function">toByteArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="73">7.3 块注释</h4>
+<p>块注释与其周围的代码在同一缩进级别。它们可以是<code>/* ... */</code>风格，也可以是<code>// ...</code>风格(<strong><code>//</code>后最好带一个空格</strong>）。对于多行的<code>/* ... */</code>注释，后续行必须从<code>*</code>开始， 并且与前一行的<code>*</code>对齐。以下示例注释都是OK的。</p>
+<pre><code class="language-java"><span class="token comment" spellcheck="true">/*
+ * This is          // And so           /* Or you can
+ * okay.            // is this.          * even do this. */</span>
+ <span class="token operator">*</span><span class="token operator">/</span>
+</code></pre>
+<p>注释不要封闭在由星号或其它字符绘制的框架里。</p>
+<blockquote>
+<p>Tip：在写多行注释时，如果你希望在必要时能重新换行(即注释像段落风格一样)，那么使用<code>/** ... */</code>。</p>
+</blockquote>
+<h4 id="74">7.4 其他一些注释</h4>
+<p>AS已帮你集成了一些注释模板，我们只需要直接使用即可，在代码中输入<code>todo</code>、<code>fixme</code>等这些注释模板，回车后便会出现如下注释</p>
+<pre><code class="language-java"><span class="token comment" spellcheck="true">// TODO: 17/3/14 需要实现，但目前还未实现的功能的说明</span>
+<span class="token comment" spellcheck="true">// FIXME: 17/3/14 需要修正，甚至代码是错误的，不能工作，需要修复的说明</span>
+</code></pre>
+<h3 id="8">8 测试规范</h3>
+<p>业务开发完成之后，开发人员做单元测试，单元测试完成之后，保证单元测试全部通过同时单元测试代码覆盖率达到一定程度（这个需要开发和测试约定，理论上越高越好），开发提测。</p>
+<p>// TODO...</p>
+<h3 id="9-rn">9 RN规范</h3>
+<p>// TODO...</p>
+<h3 id="10">10 其他的一些规范</h3>
+<ol>
+<li>
+<p>合理布局，有效运用<code>&lt;merge&gt;</code>、<code>&lt;ViewStub&gt;</code>、<code>&lt;include&gt;</code>标签；</p>
+</li>
+<li>
+<p><code>Activity</code>和<code>Fragment</code>里面有许多重复的操作以及操作步骤，所以我们都需要提供一个<code>BaseActivity</code>和<code>BaseFragment</code>，让所有的<code>Activity</code>和<code>Fragment</code>都继承这个基类。</p>
+</li>
+<li>
+<p>启动<code>Activity</code>的话建议使用AS自带的模板，输入<code>starter</code>即可，如下所示：</p>
+</li>
+</ol>
+<pre><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">start</span><span class="token punctuation">(</span>Context context<span class="token punctuation">,</span> String data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Intent starter <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Intent</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> MainActivity<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    starter<span class="token punctuation">.</span><span class="token function">putExtra</span><span class="token punctuation">(</span><span class="token string">"data"</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    context<span class="token punctuation">.</span><span class="token function">startActivity</span><span class="token punctuation">(</span>starter<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>同理，启动<code>Fragment</code>输入<code>newInstance</code>即可，如下所示：</p>
+<pre><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> MainFragment <span class="token function">newInstance</span><span class="token punctuation">(</span>String data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Bundle args <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Bundle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    args<span class="token punctuation">.</span><span class="token function">putString</span><span class="token punctuation">(</span><span class="token string">"data"</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    MainFragment fragment <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MainFragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    fragment<span class="token punctuation">.</span><span class="token function">setArguments</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> fragment<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ol start="4">
+<li>
+<p>方法基本上都按照调用的先后顺序在各自区块中排列；</p>
+</li>
+<li>
+<p>相关功能作为小区块放在一起（或者封装掉）；</p>
+</li>
+<li>
+<p>当一个类有多个构造函数，或是多个同名方法，这些函数/方法应该按顺序出现在一起，中间不要放进其它函数/方法；</p>
+</li>
+<li>
+<p>数据提供统一的入口。无论是在 MVP、MVC 还是 MVVM 中，提供一个统一的数据入口，都可以让代码变得更加易于维护。比如可使用一个<code>DataManager</code>，把 <code>http</code>、<code>preference</code>、<code>eventpost</code>、<code>database</code> 都放在<code>DataManger</code>里面进行操作，我们只需要与<code>DataManger</code>打交道；</p>
+</li>
+<li>
+<p>多用组合, 少用继承；</p>
+</li>
+<li>
+<p>提取方法, 去除重复代码。对于必要的工具类抽取也很重要，这在以后的项目中是可以重用的。</p>
+</li>
+<li>
+<p>可引入 Dagger2 减少模块之间的耦合性。Dagger2 是一个依赖注入框架，使用代码自动生成创建依赖关系需要的代码。减少很多模板化的代码，更易于测试，降低耦合，创建可复用可互换的模块；</p>
+</li>
+<li>
+<p>项目引入<code>RxJava</code> + <code>RxAndroid</code>这些响应式编程，可以极大的减少逻辑代码；</p>
+</li>
+<li>
+<p>通过引入事件总线，如：<code>EventBus</code>、<code>AndroidEventBus</code>、<code>RxBus</code>，它允许我们在<code>DataLayer</code>中发送事件，以便<code>ViewLayer</code>中的多个组件都能够订阅到这些事件，减少回调；</p>
+</li>
+<li>
+<p>尽可能使用局部变量；</p>
+</li>
+<li>
+<p>及时关闭流；</p>
+</li>
+<li>
+<p>尽量减少对变量的重复计算；</p>
+</li>
+</ol>
+<p>如下面的操作：</p>
+<pre><code class="language-java"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> list<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>建议替换为：</p>
+<pre><code class="language-java"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> len <span class="token operator">=</span> list<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ol start="16">
+<li>尽量采用懒加载的策略，即在需要的时候才创建；</li>
+</ol>
+<p>例如：</p>
+<pre><code class="language-java">String str <span class="token operator">=</span> <span class="token string">"aaa"</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>建议替换为：</p>
+<pre><code class="language-java"><span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    String str <span class="token operator">=</span> <span class="token string">"aaa"</span><span class="token punctuation">;</span>
+    list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ol start="17">
+<li>
+<p>不要在循环中使用try…catch…，应该把其放在最外层；</p>
+</li>
+<li>
+<p>使用带缓冲的输入输出流进行IO操作；</p>
+</li>
+<li>
+<p>尽量使用HashMap、ArrayList、StringBuilder，除非线程安全需要，否则不推荐使用Hashtable、Vector、StringBuffer，后三者由于使用同步机制而导致了性能开销；</p>
+</li>
+<li>
+<p>尽量在合适的场合使用单例；</p>
+</li>
+</ol>
+<p>使用单例可以减轻加载的负担、缩短加载的时间、提高加载的效率，但并不是所有地方都适用于单例，简单来说，单例主要适用于以下三个方面：</p>
+<p>（1）控制资源的使用，通过线程同步来控制资源的并发访问</p>
+<p>（2）控制实例的产生，以达到节约资源的目的</p>
+<p>（3）控制数据的共享，在不建立直接关联的条件下，让多个不相关的进程或线程之间实现通信</p>
+<ol start="21">
+<li>
+<p>把一个基本数据类型转为字符串，<code>基本数据类型.toString()</code>是最快的方式、<code>String.valueOf(数据)</code>次之、<code>数据 + ""</code>最慢；</p>
+</li>
+<li>
+<p>使用AS自带的Lint来优化代码结构（什么，你不会？右键module、目录或者文件，选择Analyze → Inspect Code）；</p>
+</li>
+<li>
+<p>最后不要忘了内存泄漏的检测；</p>
+</li>
+</ol>
+<hr>
+<h2 id="-3">附录</h2>
+<h3 id="ui">UI控件缩写表</h3>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>缩写</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TextView</td>
+<td>tv</td>
+</tr>
+<tr>
+<td>EditText</td>
+<td>et</td>
+</tr>
+<tr>
+<td>ImageButton</td>
+<td>ib</td>
+</tr>
+<tr>
+<td>Button</td>
+<td>btn</td>
+</tr>
+<tr>
+<td>ImageView</td>
+<td>iv</td>
+</tr>
+<tr>
+<td>ListView</td>
+<td>lv</td>
+</tr>
+<tr>
+<td>GridView</td>
+<td>gv</td>
+</tr>
+<tr>
+<td>ProgressBar</td>
+<td>pb</td>
+</tr>
+<tr>
+<td>SeekBar</td>
+<td>sb</td>
+</tr>
+<tr>
+<td>RadioButtion</td>
+<td>rb</td>
+</tr>
+<tr>
+<td>CheckBox</td>
+<td>cb</td>
+</tr>
+<tr>
+<td>ScrollView</td>
+<td>sv</td>
+</tr>
+<tr>
+<td>LinearLayout</td>
+<td>ll</td>
+</tr>
+<tr>
+<td>FrameLayout</td>
+<td>fl</td>
+</tr>
+<tr>
+<td>RelativeLayout</td>
+<td>rl</td>
+</tr>
+<tr>
+<td>RecyclerView</td>
+<td>rv</td>
+</tr>
+<tr>
+<td>WebView</td>
+<td>wv</td>
+</tr>
+<tr>
+<td>VideoView</td>
+<td>vv</td>
+</tr>
+<tr>
+<td>Spinner</td>
+<td>spn</td>
+</tr>
+<tr>
+<td>ToggleButton</td>
+<td>tb</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-4">常见的英文单词缩写表</h3>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>缩写</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>icon</td>
+<td>ic （主要用在app的图标）</td>
+</tr>
+<tr>
+<td>color</td>
+<td>cl（主要用于颜色值）</td>
+</tr>
+<tr>
+<td>average</td>
+<td>avg</td>
+</tr>
+<tr>
+<td>background</td>
+<td>bg（主要用于布局和子布局的背景）</td>
+</tr>
+<tr>
+<td>selector</td>
+<td>sel主要用于某一view多种状态，不仅包括Listview中的selector，还包括按钮的selector）</td>
+</tr>
+<tr>
+<td>buffer</td>
+<td>buf</td>
+</tr>
+<tr>
+<td>control</td>
+<td>ctrl</td>
+</tr>
+<tr>
+<td>default</td>
+<td>def</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>del</td>
+</tr>
+<tr>
+<td>document</td>
+<td>doc</td>
+</tr>
+<tr>
+<td>error</td>
+<td>err</td>
+</tr>
+<tr>
+<td>escape</td>
+<td>esc</td>
+</tr>
+<tr>
+<td>increment</td>
+<td>inc</td>
+</tr>
+<tr>
+<td>infomation</td>
+<td>info</td>
+</tr>
+<tr>
+<td>initial</td>
+<td>init</td>
+</tr>
+<tr>
+<td>image</td>
+<td>img</td>
+</tr>
+<tr>
+<td>Internationalization</td>
+<td>I18N</td>
+</tr>
+<tr>
+<td>length</td>
+<td>len</td>
+</tr>
+<tr>
+<td>library</td>
+<td>lib</td>
+</tr>
+<tr>
+<td>message</td>
+<td>msg</td>
+</tr>
+<tr>
+<td>password</td>
+<td>pwd</td>
+</tr>
+<tr>
+<td>position</td>
+<td>pos</td>
+</tr>
+<tr>
+<td>server</td>
+<td>srv</td>
+</tr>
+<tr>
+<td>string</td>
+<td>str</td>
+</tr>
+<tr>
+<td>temp</td>
+<td>tmp</td>
+</tr>
+<tr>
+<td>window</td>
+<td>wnd(win)</td>
+</tr>
+</tbody>
+</table>
+<p>程序中使用单词缩写原则：不要用缩写，除非该缩写是约定俗成的。</p>
+
+</body>
+</html>
